@@ -1,80 +1,110 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
+import 'package:flutter/material.dart'; //mengimport apa yang ada didalam class yang telah dibuat
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({required this.title, Key? key}) : super(key: key);
-
-  // Fields in a Widget subclass are always marked "final".
-
-  final Widget title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 56.0, // in logical pixels
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      decoration: BoxDecoration(color: Colors.blue[500]),
-      // Row is a horizontal, linear layout.
-      child: Row(
-        // <Widget> is the type of items in the list.
-        children: [
-          const IconButton(
-            icon: Icon(Icons.menu),
-            tooltip: 'Navigation menu',
-            onPressed: null, // null disables the button
-          ),
-          // Expanded expands its child
-          // to fill the available space.
-          Expanded(
-            child: title,
-          ),
-          const IconButton(
-            icon: Icon(Icons.search),
-            // tooltip: 'Search',
-            onPressed: null,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MyScaffold extends StatelessWidget {
-  const MyScaffold({Key? key}) : super(key: key);
+class LayoutRow extends StatelessWidget {
+  //untuk membuat nama class,dalam pembuatan nama class,
+  //dalam pembuatan nama class harus menggunakna huruf kapital
+  const LayoutRow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Material is a conceptual piece
-    // of paper on which the UI appears.
-    return Material(
-      // Column is a vertical, linear layout.
-      child: Column(
-        children: [
-          MyAppBar(
-            title: Text(
-              'Welcome',
-              style: Theme.of(context) //
-                  .primaryTextTheme
-                  .headline6,
+    // kelas yang membuat widget yang sifatnya statis
+    return MaterialApp(
+        //untuk memuat fungsi dari widget seperti title dan lainnya.
+        home: Scaffold(
+            //Widget utama untuk membuat sebuah halaman pafa flutter
+            appBar: AppBar(
+              //digunakan pada sebuah aplikasi sebagai menu petunjuk
+              //untuk memmudahkan pengguna aplikasi
+              flexibleSpace: SafeArea(
+                  //untuk memasang silver menghindari intrupsi sistem operasi
+                  // ignore: avoid_unnecessary_containers
+                  child: Container(
+                //berguna untuk memuat baris judul yang akan dimuat.
+                child: Column(
+                  //membuat colom.
+                  children: [
+                    //isi dari judul
+                    Row(
+                      //berguna untuk memasukan suatu baris
+                      children: const [
+                        IconButton(
+                          //untuk menampilkan menu
+                          icon: Icon(Icons.menu), //menu pilihan
+                          tooltip:
+                              'Navigation menu', //lampiran dari menu yang akan dilampirkan
+                          onPressed: null, // null disables the button
+                        ),
+                        Spacer(), //membrikan spasi pada suatu penulisan
+                        Text(
+                          //berguna menampung suatu penulisan
+                          'Kantin Politeknik Kampar', //kalimat yang ditampilkan
+                          textAlign: TextAlign
+                              .center, //peletakan posisi dari penulisan
+                        ),
+                        Spacer() //memberikan spasi pada suatu penulisan
+                      ],
+                    )
+                  ],
+                ),
+              )),
             ),
-          ),
-          const Expanded(
-            child: Center(
-              child: Text('Hello sayang abang!'),
-            ),
-          ),
-        ],
-      ),
-    );
+            // ignore: avoid_unnecessary_containers
+            body: Container(
+              child: Column(
+                children: [
+                  Row(
+                    //memasukan suatu baris
+                    children: const [
+                      Text(
+                        //menampung text yang dimasukan
+                        'kolom Pertama baris Pertama', // print
+                        textAlign:
+                            TextAlign.left, //peletakan posisi dari penulisan
+                      ),
+                      Spacer(), //memberikan spasi pada penulisan
+                      Text(
+                        //menampun text yang dimasukan
+                        'kolom kedua baris Pertama', //print
+                        textAlign: TextAlign
+                            .center, //peletakan posisi dari text yang ditampilkan
+                      ),
+                      Spacer(), //spasi pada penulisan
+                      Text(
+                        //menampung text yang dimasukan
+                        'kolom Ketiga baris Pertama', //print
+                        textAlign: TextAlign.right, //peletakan posisi tulisan
+                      ),
+                    ],
+                  ),
+                  Row(
+                    //menampilkan suatu baris
+                    children: const [
+                      Text(
+                        //menampung text yang akan dimasukan
+                        'kolom Pertama baris kedua', //print
+                        textAlign: TextAlign.left, //peletakan posisi tulisan
+                      ),
+                      Spacer(), //spasi pada penulisan
+                      Text(
+                        //menampung text yang dimasukan
+                        'kolom kedua baris kedua', //print
+                        textAlign: TextAlign.center, //peletakan posisi text
+                      ),
+                      Spacer(), //spasi pada penulisan
+                      Text(
+                        //menampung text yang akan dimasukan
+                        'kolom ketiga baris kedua', //print
+                        textAlign: TextAlign.right, //peletekan posisi tulisan
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )));
   }
 }
 
 void main() {
-  runApp(
-    const MaterialApp(
-      title: 'Daron', // used by the OS task switcher
-      home: SafeArea(
-        child: MyScaffold(),
-      ),
-    ),
-  );
+  runApp(LayoutRow());
 }
